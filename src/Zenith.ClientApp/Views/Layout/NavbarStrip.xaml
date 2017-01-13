@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="Zenith.ClientApp.Views.NavbarStrip"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Views="clr-namespace:Zenith.ClientApp.Views"
+             xmlns:SharedConverters="clr-namespace:Zenith.Client.Shared.Converters;assembly=Zenith.Client.Shared"
+             xmlns:SharedControls="clr-namespace:Zenith.Client.Shared.Controls;assembly=Zenith.Client.Shared"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Control.Resources>
+        <ResourceDictionary>
+
+            <DataTemplate x:Key="NavbarHeaderItemTemplate">
+                <StackPanel Orientation="Horizontal" 
+                            Margin="10,5">
+                    <SharedControls:ImageContentControl ImageResource="{Binding Header.ImageResource}"
+                                                        Width="16"
+                                                        Height="16"
+                                                        FillColor="White"
+                                                        Margin="5"
+                                                        MouseOverColor="Red"/>
+                    <TextBlock Text="{Binding Header.HeaderText}" 
+                               VerticalAlignment="Center"
+                               Foreground="White"
+                               Margin="15,0,0,0"
+                               Visibility="{Binding Header.TextVisible, Mode=TwoWay}"/>
+                </StackPanel>
+            </DataTemplate>
+            
+        </ResourceDictionary>
+    </Control.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        
+        <TabControl Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Width="Auto" 
+                    ItemsSource="{Binding Path=Tabs}"
+                    SelectedItem="{Binding Path=CurrentTab}"
+                    Style="{StaticResource NavbarTabControlStyle}" 
+                    ItemTemplate="{StaticResource NavbarHeaderItemTemplate}"
+                    ItemContainerStyle="{StaticResource NavbarTabItemStyle}">
+            <!--<TabControl.RenderTransform>
+                <TranslateTransform X="-45" Y="0" />
+            </TabControl.RenderTransform>-->
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <ContentControl Content="{Binding TabContent}" />
+                </DataTemplate>
+            </TabControl.ContentTemplate>
+        </TabControl>
+    </Grid>
+</UserControl>

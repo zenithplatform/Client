@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="Zenith.Client.Views.ObjectListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Zenith.Client.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Zenith.Client;component/Resources/Icons.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Zenith.Client;component/Resources/Styles.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Zenith.Client;component/Resources/DataTemplates.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Zenith.Client;component/Resources/CustomAccent.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Zenith.Client;component/Resources/StyleOverrides.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Border BorderThickness="1" 
+                    BorderBrush="DarkGray"
+                    Background="White">
+            <DockPanel LastChildFill="True">
+                <TextBlock Text="Objects" 
+                           DockPanel.Dock="Top" 
+                           Margin="5" 
+                           FontSize="15" 
+                           HorizontalAlignment="Center"/>
+                <ListBox DockPanel.Dock="Bottom" 
+                         Margin="5"
+                         ItemContainerStyle="{StaticResource MinimalItemContainerStyle}"
+                         ItemTemplate="{StaticResource ObjectsResultItemTemplate}"
+                         Grid.IsSharedSizeScope="True"
+                         HorizontalContentAlignment="Stretch"
+                         BorderThickness="0" 
+                         ItemsSource="{Binding Objects}"                         
+                         ScrollViewer.VerticalScrollBarVisibility="Visible" 
+                         ScrollViewer.CanContentScroll="True">
+                </ListBox>
+            </DockPanel>
+        </Border>    
+    </Grid>
+</UserControl>

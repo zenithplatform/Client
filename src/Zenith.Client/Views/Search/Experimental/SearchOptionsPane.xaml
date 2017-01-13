@@ -1,0 +1,145 @@
+﻿<UserControl x:Class="Zenith.Client.Views.SearchOptionsPane"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Zenith.Client.Views"
+             xmlns:model="clr-namespace:Zenith.Client.ViewModel"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             mc:Ignorable="d" 
+             Height="Auto" Width="Auto">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Zenith.Client;component/Resources/Icons.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Zenith.Client;component/Resources/Styles.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Zenith.Client;component/Resources/DataTemplates.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Zenith.Client;component/Resources/CustomAccent.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Zenith.Client;component/Resources/StyleOverrides.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate x:Key="HeaderTemplate">
+                <StackPanel Orientation="Vertical" Margin="5,5,15,5">
+                    <TextBlock Text="{Binding Title}" Name="Label" FontSize="20" Foreground="Black"/>
+                    <TextBlock Background="DarkGray" Height="4" Width="{Binding ElementName=Label, Path=Width}" Margin="0,4,0,0" Name="Underline" Visibility="Collapsed"/>
+                </StackPanel>
+                <DataTemplate.Triggers>
+                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=IsSelected}" Value="True">
+                        <Setter TargetName="Underline" Property="Visibility" Value="Visible"/>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=IsMouseOver}" Value="True">
+                        <Setter TargetName="Underline" Property="Visibility" Value="Visible"/>
+                    </DataTrigger>
+                </DataTemplate.Triggers>
+            </DataTemplate>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal">
+            <Button Grid.Row="0" Content="Open">
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="Button.Click">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimationUsingKeyFrames BeginTime="00:00:00"
+                                                               Storyboard.TargetName="Container"
+                                                               Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)">
+                                    <SplineDoubleKeyFrame KeySpline="0.25,1,0.05,1"
+                                                          KeyTime="00:00:00.750"
+                                                          Value="1" />
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames BeginTime="00:00:00"
+                                                               Storyboard.TargetName="Container"
+                                                               Storyboard.TargetProperty="(UIElement.Opacity)">
+                                    <SplineDoubleKeyFrame KeySpline="0.25,1,0.05,1"
+                                                          KeyTime="00:00:00.750"
+                                                          Value="1" />
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Button.Triggers>
+            </Button>
+            <Button Grid.Row="0" Content="Close">
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="Button.Click">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimationUsingKeyFrames BeginTime="00:00:00"
+                                                               Storyboard.TargetName="Container"
+                                                               Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
+                                                               DecelerationRatio=".9">
+                                    <SplineDoubleKeyFrame KeyTime="00:00:00.750"
+                                                          Value="-700" />
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames BeginTime="00:00:00"
+                                                               Storyboard.TargetName="Container"
+                                                               Storyboard.TargetProperty="(UIElement.Opacity)">
+                                    <SplineDoubleKeyFrame KeySpline="0.25,1,0.05,1"
+                                                          KeyTime="00:00:00.750"
+                                                          Value="0" />
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Button.Triggers>
+            </Button>
+        </StackPanel>
+
+        <DockPanel Grid.Row="1" Name="Container" Panel.ZIndex="-10">
+            <Border BorderBrush="DarkGray" 
+                    BorderThickness="1" 
+                    HorizontalAlignment="Left" 
+                    Background="White">
+                <TabControl ItemsSource="{Binding CategoriesContainer.Categories}" 
+                            ItemTemplate="{StaticResource HeaderTemplate}"
+                            SelectedItem="{Binding CategoriesContainer.SelectedCategory}"
+                            HorizontalAlignment="Left">
+                    <TabControl.Resources>
+                        <Style TargetType="{x:Type TabPanel}">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                        </Style>
+                    </TabControl.Resources>
+                    <TabControl.ContentTemplate>
+                        <DataTemplate>
+                            <ContentControl Content="{Binding CurrentView}" />
+                        </DataTemplate>
+                    </TabControl.ContentTemplate>
+                </TabControl>
+            </Border>
+            <DockPanel.RenderTransform>
+                <TranslateTransform X="0" Y="1"/>
+            </DockPanel.RenderTransform>
+        </DockPanel>
+    </Grid>
+    <!-- MinWidth="700" -->
+    
+    <!--<Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Border BorderBrush="DarkGray" BorderThickness="1">
+            <TabControl ItemsSource="{Binding Categories}" 
+                        ItemTemplate="{StaticResource HeaderTemplate}"
+                        SelectedItem="{Binding SelectedCategory}">
+                <TabControl.Resources>
+                    <Style TargetType="{x:Type TabPanel}">
+                        <Setter Property="HorizontalAlignment" Value="Center" />
+                    </Style>
+                </TabControl.Resources>
+                <TabControl.ContentTemplate>
+                    <DataTemplate>
+                        <ContentControl Content="{Binding CurrentView}" MinWidth="700"/>
+                    </DataTemplate>
+                </TabControl.ContentTemplate>
+            </TabControl>
+        </Border>
+    </Grid>-->
+</UserControl>

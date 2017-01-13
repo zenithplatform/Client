@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="Zenith.UI.Tests.DataListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Zenith.UI.Tests"
+             xmlns:controls="clr-namespace:Zenith.Client.Shared.Controls;assembly=Zenith.Client.Shared"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <controls:DataListContainer BorderBrush="DarkGray" BorderThickness="1">
+            <DataGrid ItemsSource="{Binding CurrentPageItems}" 
+                      AutoGenerateColumns="False"
+                      CanUserAddRows="false" 
+                      Background="White">
+            </DataGrid>
+            <!--<StackPanel>
+                
+                <Button Style="{StaticResource FlatButton}">
+                    
+                </Button>
+            </StackPanel>-->
+        </controls:DataListContainer>
+    </Grid>
+</UserControl>

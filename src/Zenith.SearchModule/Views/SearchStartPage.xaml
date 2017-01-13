@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="Zenith.SearchModule.Views.SearchStartPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Zenith.SearchModule.Views"
+             xmlns:ControlsShared="clr-namespace:Zenith.Client.Shared.Controls;assembly=Zenith.Client.Shared"
+             mc:Ignorable="d" 
+             Height="Auto" Width="Auto">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Zenith.SearchModule;component/Styles/Styles.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Zenith.Assets;component/Resources/Icons.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Zenith.SearchModule;component/Styles/StyleOverrides.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        
+    </Grid>
+</UserControl>

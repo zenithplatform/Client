@@ -1,0 +1,122 @@
+﻿<Controls:MetroWindow x:Class="Zenith.Client.Windows.ObjectsClassification"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Zenith.Client.Windows"
+        xmlns:Views="clr-namespace:Zenith.Client.Views"
+        xmlns:viewmodel="clr-namespace:Zenith.Client.ViewModel"
+        xmlns:graphsharp="clr-namespace:GraphSharp.Controls;assembly=GraphSharp.Controls"
+        xmlns:extensions="clr-namespace:WPFExtensions.Controls;assembly=WPFExtensions"
+        xmlns:converters="clr-namespace:Zenith.Client.Converters"
+        xmlns:tree="clr-namespace:GraphSharp.Algorithms.Layout.Simple.Tree;assembly=GraphSharp"        
+        mc:Ignorable="d"
+        Title="MetroPopupWindow" 
+        Height="Auto" 
+        Width="Auto"
+        EnableDWMDropShadow="True"
+        TitleCaps="False"
+        ResizeMode="CanResizeWithGrip"
+        WindowTransitionsEnabled="False">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Zenith.Client;component/Resources/StyleOverrides.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Zenith.Client;component/Resources/Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <converters:VertexClickParametersConverter x:Key="VertexCommandConverter" />
+            
+            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" x:Key="TestStyle">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Background="White"
+                                    BorderThickness="0"
+                                    Padding="5">
+                                <ContentPresenter />
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsPressed" Value="True">
+                        <Setter Property="Background" Value="DarkGray" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <DataTemplate x:Key="ObjectVertexTemplate" DataType="{x:Type viewmodel:ObjectTypeVertex}">
+                <!--<TextBlock Text="{Binding Title}" Padding="5">
+                    <TextBlock.InputBindings>
+                        <MouseBinding Command="{Binding DataContext.VertexClickCommand}" MouseAction="LeftClick" />
+                    </TextBlock.InputBindings>
+                </TextBlock>-->
+                <Button Content="{Binding Title}" Style="{StaticResource TestStyle}" 
+                        Command="{Binding Path=DataContext.VertexClickCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" 
+                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type graphsharp:VertexControl}}, Converter={StaticResource VertexCommandConverter}}">
+                </Button>
+            </DataTemplate>
+
+            <Style TargetType="{x:Type graphsharp:VertexControl}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type graphsharp:VertexControl}">
+                            <Border BorderBrush="DarkGray" 
+                                    Background="White"
+                                    BorderThickness="1"
+                                    Padding="{TemplateBinding Padding}">
+                                <ContentPresenter Content="{TemplateBinding Vertex}" ContentTemplate="{StaticResource ObjectVertexTemplate}"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <!--<StackPanel Orientation="Horizontal" >
+        </StackPanel>-->
+
+        <Border BorderBrush="DarkGray" BorderThickness="1" Grid.Row="0">
+            <StackPanel Orientation="Horizontal">
+                <Button Style="{StaticResource TestStyle}"
+                        Command="{Binding Path=DataContext.BackCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                        HorizontalAlignment="Left"
+                        Margin="5,0,20,0">
+                    <Rectangle Fill="Black" Width="16" Height="16" x:Name="rect" HorizontalAlignment="Left">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Visual="{StaticResource appbar_arrow_left}" Stretch="Fill" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                </Button>
+                <TextBlock Text="Test" VerticalAlignment="Center" FontWeight="Bold"/>
+            </StackPanel>
+        </Border>
+
+        <extensions:ZoomControl Zoom="0.6" Margin="30" Grid.Row="1">
+            <viewmodel:ObjectTypesGraphLayout Graph="{Binding Path=CurrentGraph}" 
+                                              LayoutAlgorithmType="Tree" 
+                                              OverlapRemovalAlgorithmType="FSA">
+                <viewmodel:ObjectTypesGraphLayout.LayoutParameters>
+                    <tree:SimpleTreeLayoutParameters Direction="LeftToRight" 
+                                                     LayerGap="30" 
+                                                     OptimizeWidthAndHeight="True" 
+                                                     VertexGap="40">                        
+                    </tree:SimpleTreeLayoutParameters>
+                </viewmodel:ObjectTypesGraphLayout.LayoutParameters>
+            </viewmodel:ObjectTypesGraphLayout>
+        </extensions:ZoomControl>
+    </Grid>
+</Controls:MetroWindow>

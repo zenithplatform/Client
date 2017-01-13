@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="Zenith.SearchModule.Views.SearchHistory"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Zenith.SearchModule.Views"
+             xmlns:MahappsControls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             mc:Ignorable="d" 
+             Height="Auto" Width="Auto">
+    <UserControl.Resources>        
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Zenith.SearchModule;component/Styles/Styles.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Zenith.Assets;component/Resources/Icons.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Zenith.SearchModule;component/Styles/StyleOverrides.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            
+            <Style TargetType="{x:Type TextBlock}" x:Key="EmptyMessageStyle">
+                <Setter Property="Visibility" Value="Collapsed" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding RecordCount}" Value="0">
+                        <Setter Property="Foreground" Value="DarkGray" />
+                        <Setter Property="Text" Value="{Binding EmptyGridMessage}" />
+                        <Setter Property="Visibility" Value="Visible" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+        
+    </UserControl.Resources>
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Search history" Margin="10" />
+                <Line Stretch="Fill" Stroke="Black" X2="1" MinWidth="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=Width}"/>
+            </StackPanel>
+            <Border Margin="30" BorderBrush="DarkGray" BorderThickness="1">
+                <DataGrid ItemsSource="{Binding SearchHistory}"
+                      GridLinesVisibility="All" 
+                      CanUserAddRows="False" 
+                      CanUserDeleteRows="False" 
+                      CanUserResizeRows="False" 
+                      IsReadOnly="True" 
+                      MinHeight="200"
+                      AutoGenerateColumns="False"
+                      ColumnHeaderStyle="{StaticResource NormalGridHeader}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Date and time" Binding="{Binding Path=DateTime}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Search term" Binding="{Binding Path=SearchTerm}" IsReadOnly="True"/>
+                    </DataGrid.Columns>
+                    <DataGrid.Resources>
+                        <SolidColorBrush x:Key="MetroDataGrid.HighlightBrush" Color="#ff4d4d" />
+                        <SolidColorBrush x:Key="MetroDataGrid.HighlightTextBrush" Color="White" />
+                        <SolidColorBrush x:Key="MetroDataGrid.MouseOverHighlightBrush" Color="#ff8080" />
+                    </DataGrid.Resources>
+                    <DataGrid.Background>
+                        <VisualBrush Stretch="None">
+                            <VisualBrush.Visual>
+                                <StackPanel>
+                                    <TextBlock Style="{StaticResource EmptyMessageStyle}" DataContext="{Binding}" Margin="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </DataGrid.Background>
+                </DataGrid>
+            </Border>
+        </StackPanel>
+    </Grid>
+</UserControl>

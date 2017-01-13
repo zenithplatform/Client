@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="Zenith.UI.Tests.Views.AdornerToolbar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:SharedStyles="clr-namespace:Zenith.Client.Shared.Styles;assembly=Zenith.Client.Shared"
+             xmlns:local="clr-namespace:Zenith.UI.Tests.Views"
+             mc:Ignorable="d" 
+             Height="Auto" Width="Auto">
+    <Border Background="White" HorizontalAlignment="Left" BorderBrush="LightGray" BorderThickness="1,1,1,0">
+        <DockPanel LastChildFill="False">
+            <ToggleButton Style="{StaticResource FlatToggleButtonStyle}"
+                              SharedStyles:StyleProperties.MouseOverBorderBrush="White"
+                              BorderBrush="Transparent"
+                              VerticalAlignment="Center" 
+                              Margin="2"
+                              DockPanel.Dock="Left"
+                              Click="ToggleButton_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Fill="Black" Height="16" Width="16" Margin="2">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Visual="{StaticResource appbar_cursor_move}" Stretch="Uniform" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                </StackPanel>
+            </ToggleButton>
+            <ToggleButton Style="{StaticResource FlatToggleButtonStyle}"
+                              SharedStyles:StyleProperties.MouseOverBorderBrush="White"
+                          BorderBrush="Transparent"
+                              VerticalAlignment="Center" 
+                              Margin="2"
+                              DockPanel.Dock="Left">
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Fill="Black" Height="16" Width="16" Margin="2">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Visual="{StaticResource appbar_edit}" Stretch="Uniform" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                </StackPanel>
+            </ToggleButton>
+            <ToggleButton Style="{StaticResource FlatToggleButtonStyle}"
+                              SharedStyles:StyleProperties.MouseOverBorderBrush="White"
+                          BorderBrush="Transparent"
+                              VerticalAlignment="Center" 
+                              Margin="2"
+                              DockPanel.Dock="Left">
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Fill="Black" Height="16" Width="16" Margin="2">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Visual="{StaticResource appbar_save}" Stretch="Uniform" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                </StackPanel>
+            </ToggleButton>
+            <Button Style="{StaticResource FlatButtonStyle}"
+                              SharedStyles:StyleProperties.MouseOverBorderBrush="White"
+                          BorderBrush="Transparent"
+                              VerticalAlignment="Center" 
+                              Margin="2"
+                              DockPanel.Dock="Left"
+                    Command="{Binding MoveCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Fill="Black" Height="16" Width="16" Margin="2">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Visual="{StaticResource appbar_control_play}" Stretch="Uniform" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                </StackPanel>
+            </Button>
+        </DockPanel>
+    </Border>
+</UserControl>

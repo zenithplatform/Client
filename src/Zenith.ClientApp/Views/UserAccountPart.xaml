@@ -1,0 +1,89 @@
+﻿<UserControl x:Class="Zenith.ClientApp.Views.UserAccountPart"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Zenith.ClientApp.Views"
+             xmlns:SharedControls="clr-namespace:Zenith.Client.Shared.Controls;assembly=Zenith.Client.Shared"
+             xmlns:SharedConverters="clr-namespace:Zenith.Client.Shared.Converters;assembly=Zenith.Client.Shared"
+             xmlns:MahAppsControls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:ViewModel="clr-namespace:Zenith.ClientApp.ViewModel"
+             xmlns:SharedStyles="clr-namespace:Zenith.Client.Shared.Styles;assembly=Zenith.Client.Shared"
+             xmlns:SharedHelpers="clr-namespace:Zenith.Client.Shared.ControlHelpers;assembly=Zenith.Client.Shared"
+             mc:Ignorable="d" 
+             Height="Auto" Width="Auto">
+    <Control.Resources>
+        <ResourceDictionary>
+
+            <!--<SharedConverters:KeyToResourceConverter x:Key="keyResourceConverter" 
+                                                     ResourceUri="pack://application:,,,/Zenith.ClientApp;component/Resources/Icons.xaml"/>-->
+
+            <DataTemplate DataType="{x:Type ViewModel:AnonymousUserViewModel}">
+                <Label Content="Offline" 
+                       Foreground="Red" 
+                       FontWeight="Normal" 
+                       FontSize="12" 
+                       BorderBrush="Red" 
+                       BorderThickness="1"
+                       Margin="5"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"/>
+            </DataTemplate>
+            <!--SharedHelpers:ContextMenuLeftClickBehavior.IsLeftClickEnabled="True"-->
+            <DataTemplate DataType="{x:Type ViewModel:LoggedUserDropdownPart}">
+                <SharedControls:AnimatedDropdownButton Caption="lkjalsdkjlkjalskdj"
+                                                       Padding="3,10"
+                                                       Margin="0,0,-10,0"
+                                                       SharedStyles:StyleProperties.MouseOverBackgroundBrush="LightGray">
+                    <Rectangle Fill="Black" Height="16" Width="16" Margin="10,0">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Visual="{StaticResource acc_outline}" Stretch="Uniform" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <SharedControls:AnimatedDropdownButton.ContextMenu>
+                        <ContextMenu IsOpen="{Binding IsChecked}">
+                            <MenuItem Header="Menu item 1" />
+                            <MenuItem Header="Menu item 2" />
+                            <Separator />
+                            <MenuItem Header="Menu item 3" />
+                        </ContextMenu>
+                    </SharedControls:AnimatedDropdownButton.ContextMenu>
+                </SharedControls:AnimatedDropdownButton>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type ViewModel:RegisteredUserViewModel}">
+                <StackPanel Orientation="Horizontal">
+                    <Button Style="{StaticResource FlatButtonStyle}"
+                                  SharedStyles:StyleProperties.MouseOverBackgroundBrush="LightGray"
+                                  Padding="3,10"
+                                  BorderThickness="0">
+                        <Rectangle Fill="Black" Height="18" Width="18" Margin="10,0">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Visual="{StaticResource notification}" Stretch="Uniform" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                    </Button>
+
+                    <Button Style="{StaticResource FlatButtonStyle}"
+                                  SharedStyles:StyleProperties.MouseOverBackgroundBrush="LightGray"
+                                  Padding="3,10"
+                                  BorderThickness="0">
+                        <Rectangle Fill="Black" Height="18" Width="18" Margin="10,0">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Visual="{StaticResource appbar_email}" Stretch="Uniform" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                    </Button>
+
+                    <ContentPresenter Content="{Binding LoggedUserPart}"/>
+                    
+                </StackPanel>
+            </DataTemplate>
+            
+        </ResourceDictionary>
+    </Control.Resources>
+    <Grid>
+        <ContentControl Content="{Binding CurrentView}" 
+                        DataContext="{Binding Account}"/>
+    </Grid>
+</UserControl>

@@ -1,0 +1,71 @@
+﻿<Controls:MetroWindow x:Class="Zenith.Client.Shell"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Zenith.Client"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:Views="clr-namespace:Zenith.Client.Views"
+        EnableDWMDropShadow="True"
+        TitleCaps="False"
+        ResizeMode="CanResizeWithGrip"
+        WindowTransitionsEnabled="False"
+        WindowStartupLocation="CenterScreen"
+        ShowIconOnTitleBar="True"
+        ShowSystemMenuOnRightClick="True"
+        mc:Ignorable="d"
+        WindowTitleBrush="#ff4d4d"
+        Title="Shell" Height="500" Width="800" Background="WhiteSmoke">
+    <!--WindowTitleBrush="AccentColor"-->
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+
+                <ResourceDictionary Source="pack://application:,,,/Zenith.Client;component/Resources/Icons.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Zenith.Client;component/Resources/CustomAccent.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Red.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="252*"/>
+            <RowDefinition Height="25" />
+        </Grid.RowDefinitions>
+        <Views:Navbar Grid.ColumnSpan="3" Grid.Row="0" DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Controls:MetroWindow}}, Path=NavbarModel}" Margin="0,0,0,0"/>
+        <StatusBar Grid.Row="2" Grid.ColumnSpan="2"/>
+    </Grid>
+    <Controls:MetroWindow.Flyouts>
+        <Controls:FlyoutsControl Name="Flyouts">
+            <Controls:FlyoutsControl.Template>
+                <ControlTemplate>
+                    <Grid>
+                        <ItemsPresenter />
+                    </Grid>
+                </ControlTemplate>
+            </Controls:FlyoutsControl.Template>
+            <Controls:FlyoutsControl.ItemContainerStyle>
+                <Style BasedOn="{StaticResource {x:Type Controls:Flyout}}"
+                   TargetType="{x:Type Controls:Flyout}">
+                    <Setter Property="Header"
+                        Value="{Binding Header}" />
+                    <Setter Property="IsOpen"
+                        Value="{Binding IsOpen}" />
+                    <Setter Property="Position"
+                        Value="{Binding Position}" />
+                    <Setter Property="IsModal"
+                        Value="{Binding IsModal}" />
+                </Style>
+            </Controls:FlyoutsControl.ItemContainerStyle>
+        </Controls:FlyoutsControl>
+    </Controls:MetroWindow.Flyouts>
+</Controls:MetroWindow>

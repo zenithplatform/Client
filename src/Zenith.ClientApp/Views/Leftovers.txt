@@ -1,0 +1,285 @@
+﻿AccountView.xaml
+
+<!-- Animation code, for growing and shrinking logged user icon -->
+
+            <Storyboard x:Key="ExpandStoryboard">
+                <DoubleAnimation Storyboard.TargetProperty="TranslateTransform.X" To="2" Duration="0:0:0.2" />
+                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" To="2" Duration="0:0:0.2" />
+            </Storyboard>
+            <Storyboard x:Key="ShrinkStoryboard">
+                <DoubleAnimation Storyboard.TargetProperty="TranslateTransform.X" To="1" Duration="0:0:0.2" />
+                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" To="1" Duration="0:0:0.2" />
+            </Storyboard>
+
+            <Style TargetType="ToggleButton" x:Key="AnimatedButtonStyle" 
+                   BasedOn="{StaticResource FlatToggleButtonStyle}">
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="RenderTransform">
+                    <!--<Setter.Value>
+                        <ScaleTransform ScaleX="1" ScaleY="1"/>
+                    </Setter.Value>-->
+                    <Setter.Value>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="1" ScaleY="1"/>
+                            <TranslateTransform X="1" Y="1"/>
+                        </TransformGroup>
+                        <!--<TranslateTransform X="1" Y="1"/>-->
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ToggleButton">
+                            <Grid>
+                                <ContentPresenter />
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Trigger.EnterActions>
+                                        <BeginStoryboard Storyboard="{StaticResource ExpandStoryboard}" />
+                                    </Trigger.EnterActions>
+                                    <Trigger.ExitActions>
+                                        <BeginStoryboard Storyboard="{StaticResource ShrinkStoryboard}" />
+                                    </Trigger.ExitActions>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            
+            <!--<Style TargetType="ToggleButton" x:Key="PolymorphButtonStyle">
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ToggleButton">
+                            <Grid>
+                                <Border Name="PART_Button"
+                                        Background="{TemplateBinding Background}">
+                                    <Rectangle Fill="Black" Height="18" Width="18">
+                                        <Rectangle.OpacityMask>
+                                            <VisualBrush Visual="{StaticResource appbar_people}" Stretch="Uniform" />
+                                        </Rectangle.OpacityMask>
+                                    </Rectangle>
+                                </Border>
+
+                                <Border Name="PART_DropdownButton"
+                                        Background="{TemplateBinding Background}">
+                                    <MahAppsControls:DropDownButton Content="This is test user"
+                                                                    Margin="5,5,5,5"
+                                                                    Padding="0,0,10,0"
+                                                                    Background="LightGray"
+                                                                    FontWeight="Bold"
+                                                                    VerticalContentAlignment="Center"
+                                                                    HorizontalContentAlignment="Left"
+                                                                    DisplayMemberPath="Title"
+                                                                    ItemsSource="{Binding Albums}"
+                                                                    HorizontalAlignment="Right"
+                                                                    Visibility="Hidden">
+                                        <MahAppsControls:DropDownButton.IconTemplate>
+                                            <DataTemplate>
+                                                <Rectangle Fill="Black" Height="16" Width="16" x:Name="rect" Margin="5,5,10,5">
+                                                    <Rectangle.OpacityMask>
+                                                        <VisualBrush Visual="{StaticResource appbar_user}" Stretch="Fill" />
+                                                    </Rectangle.OpacityMask>
+                                                </Rectangle>
+                                            </DataTemplate>
+                                        </MahAppsControls:DropDownButton.IconTemplate>
+                                    </MahAppsControls:DropDownButton>
+                                </Border>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter TargetName="PART_Button" Property="Visibility" Value="Hidden" />
+                                    <Setter TargetName="PART_DropdownButton" Property="Visibility" Value="Visible" />
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="False">
+                                    <Setter TargetName="PART_Button" Property="Visibility" Value="Visible" />
+                                    <Setter TargetName="PART_DropdownButton" Property="Visibility" Value="Collapsed" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>-->
+
+
+			<DataTemplate x:Key="FullAccountDropdownButton">
+                <MahAppsControls:DropDownButton Content="This is test user"
+                                                Margin="5,5,5,5"
+                                                Padding="0,0,10,0"
+                                                Background="LightGray"
+                                                FontWeight="Bold"
+                                                VerticalContentAlignment="Center"
+                                                HorizontalContentAlignment="Left"
+                                                DisplayMemberPath="Title"
+                                                ItemsSource="{Binding Albums}"
+                                                HorizontalAlignment="Right"
+                                                Visibility="Hidden">
+                    <MahAppsControls:DropDownButton.IconTemplate>
+                        <DataTemplate>
+                            <Rectangle Fill="Black" Height="16" Width="16" x:Name="rect" Margin="5,5,10,5">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush Visual="{StaticResource appbar_user}" Stretch="Fill" />
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                        </DataTemplate>
+                    </MahAppsControls:DropDownButton.IconTemplate>
+                </MahAppsControls:DropDownButton>
+            </DataTemplate>
+
+            <DataTemplate x:Key="MinimalAccountButton">
+                <ToggleButton Style="{StaticResource FlatToggleButtonStyle}" Margin="5">
+                    <Rectangle Fill="Black" Height="18" Width="18">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Visual="{StaticResource appbar_people}" Stretch="Uniform" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                </ToggleButton>
+            </DataTemplate>
+
+
+			<!--<ToggleButton Style="{StaticResource FlatToggleButtonStyle}" Margin="5">
+                        <Rectangle Fill="Black" Height="18" Width="18">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Visual="{StaticResource appbar_people}" Stretch="Uniform" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                    </ToggleButton>-->
+                    <ToggleButton Style="{StaticResource AnimatedButtonStyle}" Margin="5">
+                        <Rectangle Fill="Black" Height="18" Width="18">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Visual="{StaticResource appbar_people}" Stretch="Uniform" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                    </ToggleButton>
+
+
+
+
+
+
+
+					<!--<SharedControls:AdornedControl
+                        HorizontalAdornerPlacement="Outside"
+                        VerticalAdornerPlacement="Outside"
+                        CloseAdornerTimeOut="0.3"
+                        FadeOutTime="0.3">
+                        <SharedControls:AdornedControl.AdornerContent>
+                            <Border HorizontalAlignment="Left">
+                                <Button Style="{StaticResource FlatButtonStyle}"
+                                        Margin="2,2,2,2"
+                                        HorizontalAlignment="Stretch" 
+                                        VerticalAlignment="Top">
+                                    <Rectangle Fill="Black" Height="16" Width="16" Margin="2">
+                                        <Rectangle.OpacityMask>
+                                            <VisualBrush Visual="{StaticResource appbar_page_copy}" Stretch="Uniform" />
+                                        </Rectangle.OpacityMask>
+                                    </Rectangle>
+                                </Button>
+                            </Border>
+                        </SharedControls:AdornedControl.AdornerContent>
+                        <Border BorderBrush="Black" BorderThickness="1" Margin="10,30,10,10">
+                            <ScrollViewer HorizontalScrollBarVisibility="Auto" 
+                                      VerticalScrollBarVisibility="Auto">
+                                <ListBox ItemsSource="{Binding Items}" 
+                                     ItemContainerStyle="{StaticResource ListStyle}"
+                                     ItemTemplate="{StaticResource ListItemTemplate}"
+                                     HorizontalContentAlignment="Stretch"
+                                     Margin="10,10,10,10"
+                                     MaxHeight="500"/>
+                            </ScrollViewer >
+                        </Border>
+                    </SharedControls:AdornedControl>-->
+
+                    <!--<Button Style="{StaticResource FlatButtonStyle}"
+                            Margin="2"
+                            BorderBrush="DarkGray"
+                            BorderThickness="1" 
+                            Background="LightGray"
+                            SharedStyles:StyleProperties.MouseOverBackgroundBrush="WhiteSmoke" 
+                            DockPanel.Dock="Left" 
+                            HorizontalAlignment="Left">
+                            <Rectangle Fill="Black" Height="16" Width="16" Margin="2">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush Visual="{StaticResource appbar_page_copy}" Stretch="Uniform" />
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                        </Button>-->
+                    <!--<Border Margin="10,30,10,10" BorderBrush="Black" BorderThickness="1">
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" 
+                                  VerticalScrollBarVisibility="Auto">
+                            <ListBox ItemsSource="{Binding Items}" 
+                                 ItemContainerStyle="{StaticResource ListStyle}"
+                                 ItemTemplate="{StaticResource ListItemTemplate}"
+                                 HorizontalContentAlignment="Stretch"
+                                 Margin="10,10,10,10"
+                                 MaxHeight="500"/>
+                        </ScrollViewer >
+                    </Border>-->
+
+
+					<!--<DataTemplate DataType="{x:Type ViewModel:LoggedUserDropdownPart}">
+                <MahAppsControls:DropDownButton Content="This is test user"
+                                                Margin="5,5,-5,5"
+                                                Padding="0,0,10,0"
+                                                Background="White"
+                                                FontWeight="Bold"
+                                                VerticalContentAlignment="Center"
+                                                HorizontalContentAlignment="Left"
+                                                DisplayMemberPath="."
+                                                ItemsSource="{Binding Actions}"
+                                                HorizontalAlignment="Right">
+                    <MahAppsControls:DropDownButton.IconTemplate>
+                        <DataTemplate>
+                            <Rectangle Fill="Black" Height="16" Width="16" x:Name="rect" Margin="0,0,10,0">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush Visual="{StaticResource appbar_user}" Stretch="Uniform" />
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                        </DataTemplate>
+                    </MahAppsControls:DropDownButton.IconTemplate>
+                </MahAppsControls:DropDownButton>
+            </DataTemplate>-->
+
+			User part
+
+			<!--<ToggleButton Style="{StaticResource FlatToggleButtonStyle}"
+                                  SharedStyles:StyleProperties.MouseOverBackgroundBrush="LightGray"
+                                  BorderBrush="Transparent" Margin="0,0,-10,0">
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Fill="Black" Height="18" Width="18" Margin="10,0">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Visual="{StaticResource appbar_connect}" Stretch="Uniform" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <TextBlock Text="Offline" 
+                                   VerticalAlignment="Center" 
+                                   Padding="0,0,10,0" 
+                                   HorizontalAlignment="Left" 
+                                   FontWeight="Bold"/>
+                    </StackPanel>
+                </ToggleButton>-->
+
+
+
+
+				Navbar style
+
+				<EventTrigger  RoutedEvent="Button.Click">
+                                            <EventTrigger.Actions>
+                                                <BeginStoryboard >
+                                                    <Storyboard  RepeatBehavior="Forever" AutoReverse="False">
+                                                        <DoubleAnimation  Storyboard.TargetName="myWindow"
+                                      Storyboard.TargetProperty = "(Window.Height)"
+                                        To="300" Duration="0:0:5"/>
+                                                        <Storyboard  RepeatBehavior="Forever" AutoReverse="False">
+
+                                                            <DoubleAnimation  Storyboard.TargetName="myWindow"
+                                      Storyboard.TargetProperty = "(Window.Width)"
+                                        To="300" Duration="0:0:5"/>
+                                                        </Storyboard>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+
+                                            </EventTrigger.Actions>
+                                        </EventTrigger>

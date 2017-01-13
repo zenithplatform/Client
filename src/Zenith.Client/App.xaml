@@ -1,0 +1,12 @@
+﻿<Application x:Class="Zenith.Client.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Zenith.Client"
+             xmlns:test="clr-namespace:Zenith.Client.Test"
+             StartupUri="Shell.xaml">
+    <Application.Resources>
+        
+    </Application.Resources>
+</Application>
+
+<!--StartupUri="Test\TestWindow.xaml"-->

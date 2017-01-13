@@ -1,0 +1,134 @@
+﻿<UserControl x:Class="Zenith.UI.Tests.Views.EntryFormView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Zenith.UI.Tests.Views"
+             xmlns:MahAppsControls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"             
+             xmlns:SharedStyles="clr-namespace:Zenith.Client.Shared.Styles;assembly=Zenith.Client.Shared"
+             mc:Ignorable="d" 
+             Height="Auto" Width="Auto">
+    <Border BorderBrush="Black" BorderThickness="1" VerticalAlignment="Top">
+        <Grid HorizontalAlignment="Left">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Border>
+                <!---->
+                <DockPanel>
+                    <TextBlock Text="Welcome to Zenith" 
+                               FontWeight="Bold" 
+                               FontSize="22" 
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Margin="10"/>
+                    <ToggleButton Style="{StaticResource FlatToggleButtonStyle}"
+                                  SharedStyles:StyleProperties.MouseOverBackgroundBrush="LightGray"
+                                  HorizontalAlignment="Right"
+                                  VerticalAlignment="Center" 
+                                  Margin="10"
+                                  BorderBrush="DarkGray"
+                                  BorderThickness="1">
+                        <StackPanel Orientation="Horizontal">
+                            <Rectangle Fill="Black" Height="18" Width="18" Margin="5">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush Visual="{StaticResource appbar_question}" Stretch="Uniform" />
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                        </StackPanel>
+                    </ToggleButton>
+                </DockPanel>
+            </Border>
+
+            <TabControl Grid.Row="1" 
+                        Style="{StaticResource CenteredTabsControlStyle}"
+                        Margin="0,0,0,15">
+                <TabControl.Resources>
+                    <Style TargetType="TabItem" 
+                           BasedOn="{StaticResource AzureTabItem}"/>
+                </TabControl.Resources>
+                <TabItem Header="Login">
+                    <Border Margin="0,10,0,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="250"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40" />
+                                <RowDefinition Height="40" />
+                                <RowDefinition Height="40" />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Text="Username :" Margin="10,5" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center"/>
+                            <TextBox Text="" Margin="5" Grid.Column="1" Grid.Row="0" VerticalContentAlignment="Center"/>
+
+                            <TextBlock Text="Password :" Margin="10,5" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center"/>
+                            <PasswordBox Name="PasswordFieldLogin" Margin="5" Grid.Column="1" Grid.Row="1" VerticalContentAlignment="Center"/>
+
+                            <CheckBox Content="Remember me" Margin="5" Grid.Column="1" Grid.Row="2"/>
+                            <Button Style="{StaticResource FlatButtonStyle}" 
+                                    Content="Login" 
+                                    Margin="5,5,10,5" 
+                                    Grid.Column="2" 
+                                    Grid.Row="1" 
+                                    MinWidth="90"
+                                    Height="{Binding ElementName=PasswordFieldLogin, Path=ActualHeight}"
+                                    BorderBrush="DarkGray"
+                                    BorderThickness="1"/>
+                        </Grid>
+                    </Border>
+                </TabItem>
+                <TabItem Header="Create new account">
+                    <Border Margin="0,0,0,10">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="250"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40" />
+                                <RowDefinition Height="40" />
+                                <RowDefinition Height="40" />
+                                <RowDefinition Height="40" />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Text="Email address :" Margin="10,5" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center"/>
+                            <TextBox Text="" Margin="5" Grid.Column="1" Grid.Row="0" VerticalContentAlignment="Center"/>
+
+                            <TextBlock Text="Username :" Margin="10,5" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center"/>
+                            <TextBox Text="" Margin="5" Grid.Column="1" Grid.Row="1" VerticalContentAlignment="Center"/>
+
+                            <TextBlock Text="Password :" Margin="10,5" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center"/>
+                            <PasswordBox Name="PasswordField" Margin="5" Grid.Column="1" Grid.Row="2" VerticalContentAlignment="Center"/>
+
+                            <TextBlock Text="Re-type password :" Margin="10,5" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center"/>
+                            <PasswordBox Name="PasswordFieldConfirm" Margin="5" Grid.Column="1" Grid.Row="3" VerticalContentAlignment="Center"/>
+
+                            <Button Style="{StaticResource FlatButtonStyle}" 
+                                    Content="Sign up" 
+                                    Margin="5,5,10,5" 
+                                    Grid.Column="2" 
+                                    Grid.Row="3" 
+                                    MinWidth="90"
+                                    Height="{Binding ElementName=PasswordFieldConfirm, Path=ActualHeight}"
+                                    BorderBrush="DarkGray"
+                                    BorderThickness="1"/>
+                        </Grid>
+                    </Border>
+                </TabItem>
+            </TabControl>
+
+            <Border Grid.Row="2" BorderBrush="Black" BorderThickness="0,1,0,0">
+                <local:EntryFormFooter />
+            </Border>
+        </Grid>
+    </Border>
+</UserControl>

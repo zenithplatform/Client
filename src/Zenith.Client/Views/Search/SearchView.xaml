@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="Zenith.Client.Views.SearchView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+      xmlns:WPFSpark="clr-namespace:WPFSpark;assembly=Zenith.Client.Shared"
+      xmlns:Views="clr-namespace:Zenith.Client.Views"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Zenith.Client.Views"
+      mc:Ignorable="d" Height="Auto" Width="Auto">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Zenith.Client;component/Resources/Styles.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Zenith.Client;component/Resources/DataTemplates.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="200*" />
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" DockPanel.Dock="Top">
+                <Views:ExpandableSearchBar
+                            Margin="10,0,10,10" 
+                            BorderBrush="Transparent" 
+                            BorderThickness="0" 
+                            DataContext="{Binding SearchBarModel}"/>
+            </Border>
+
+            <Border Grid.Row="1" Margin="100,0,100,0" Visibility="{Binding ProgressVisible, Mode=TwoWay}">
+                <WPFSpark:FluidProgressBar
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Foreground="Black"
+                                DotWidth="5"
+                                DotHeight="5"
+                                DotRadiusX="0"
+                                DotRadiusY="0"
+                                Oscillate="False"
+                                TotalDuration="00:00:03.25"
+                                ReverseDuration="00:00:02.30"
+                                KeyFrameA="0.3"
+                                KeyFrameB="0.6"
+                                DurationA="00:00:00.25"
+                                DurationB="00:00:01.25"
+                                DurationC="00:00:00.25"
+                                Delay="00:00:00.095"/>
+            </Border>
+
+            <ContentControl Grid.Row="1" Content="{Binding ResultContent}" Visibility="{Binding Path=SearchResultVisible, Mode=TwoWay}"/>
+        </Grid>
+    </Grid>
+</UserControl>

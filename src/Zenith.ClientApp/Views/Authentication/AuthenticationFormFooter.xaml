@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="Zenith.ClientApp.Views.AuthenticationFormFooter"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Zenith.ClientApp.Views"
+             mc:Ignorable="d" 
+             Height="Auto" Width="Auto">
+    <Border Grid.Row="2"
+            BorderBrush="Black"
+            BorderThickness="0,1,0,0">
+        <DockPanel>
+            <StackPanel>
+                <ProgressBar Height="4" 
+                            IsIndeterminate="{Binding IsIndeterminate}"
+                            Visibility="{Binding ProgressVisible}"
+                            Value="0">
+                    <ProgressBar.Style>
+                        <Style TargetType="{x:Type ProgressBar}">
+                            <Setter Property="Foreground" Value="Red" />
+                            <Setter Property="BorderBrush" Value="Transparent" />
+                            <Setter Property="Background" Value="Transparent" />
+                        </Style>
+                    </ProgressBar.Style>
+                </ProgressBar>
+                <StackPanel Orientation="Vertical"
+                            Visibility="{Binding ResetLinkVisible}">
+                    <TextBlock Margin="5,2,5,5">
+                        <Hyperlink Foreground="Black">
+                            I forgot my password
+                        </Hyperlink>
+                    </TextBlock>
+                </StackPanel>
+            </StackPanel>
+        </DockPanel>
+    </Border>
+</UserControl>

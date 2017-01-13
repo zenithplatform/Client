@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{97928583-24F4-4BE2-95EB-47DADBBD913C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Zenith.SearchModule</RootNamespace>
+    <AssemblyName>Zenith.SearchModule</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MahApps.Metro, Version=1.2.4.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.2.4.0\lib\net45\MahApps.Metro.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.2.4.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Converters\CommandParameterConverters.cs" />
+    <Compile Include="Converters\StyleConverters.cs" />
+    <Compile Include="Helpers\ModelHelpers.cs" />
+    <Compile Include="Helpers\UIHelpers.cs" />
+    <Compile Include="ModuleInit.cs" />
+    <Compile Include="ModuleMetadata.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="TO_DELETE\SearchStartPage.xaml.cs">
+      <DependentUpon>SearchStartPage.xaml</DependentUpon>
+    </None>
+    <Compile Include="ViewModels\Helpers\SearchHelper.cs" />
+    <Compile Include="ViewModels\Options\Experimental\ObjectCategoryViewModel.cs" />
+    <Compile Include="ViewModels\Options\Experimental\ObjectSearchViewModel.cs" />
+    <Compile Include="ViewModels\Options\Experimental\SearchCategoryViewModel.cs" />
+    <Compile Include="ViewModels\Options\Experimental\SearchOptionsPaneViewModel.cs" />
+    <Compile Include="ViewModels\Options\Shared\SearchOptionsItem.cs" />
+    <Compile Include="ViewModels\Options\Shared\SearchOptionsViewModel.cs" />
+    <Compile Include="ViewModels\Options\Shared\SearchOptionsViewModelBase.cs" />
+    <Compile Include="ViewModels\Options\Shared\SearchOptionsViewModelParts.cs" />
+    <Compile Include="ViewModels\Results\CatalogsResultViewModel.cs" />
+    <Compile Include="ViewModels\Results\ObjectListViewModel.cs" />
+    <Compile Include="ViewModels\Results\ObjectsDetailsViewModel.cs" />
+    <Compile Include="ViewModels\Results\PageableCatalogResultViewModel.cs" />
+    <Compile Include="ViewModels\SearchBar\SearchBarViewModel.cs" />
+    <Compile Include="ViewModels\SearchHistoryViewModel.cs" />
+    <Compile Include="ViewModels\SearchTileViewModel.cs" />
+    <Compile Include="ViewModels\SearchViewModel.cs" />
+    <Compile Include="Views\CatalogSearchResultsView.xaml.cs">
+      <DependentUpon>CatalogSearchResultsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ConeObjectSearchView.xaml.cs">
+      <DependentUpon>ConeObjectSearchView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\IdentifierObjectSearchView.xaml.cs">
+      <DependentUpon>IdentifierObjectSearchView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ObjectsListView.xaml.cs">
+      <DependentUpon>ObjectsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ObjectDetailsView.xaml.cs">
+      <DependentUpon>ObjectDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ObjectSearchOptions.xaml.cs">
+      <DependentUpon>ObjectSearchOptions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ObservationData.xaml.cs">
+      <DependentUpon>ObservationData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchHistory.xaml.cs">
+      <DependentUpon>SearchHistory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchOptionsPane.xaml.cs">
+      <DependentUpon>SearchOptionsPane.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchStartPage.xaml.cs">
+      <DependentUpon>SearchStartPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchTileView.xaml.cs">
+      <DependentUpon>SearchTileView.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Backend\Core\Zenith.Core.Models\Zenith.Core.Models.csproj">
+      <Project>{2078c725-c3cf-4254-9693-e0caec1978d5}</Project>
+      <Name>Zenith.Core.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Backend\Core\Zenith.Core.Service\Zenith.Core.Service.csproj">
+      <Project>{445f8d0e-dc47-4de3-92d3-53c868477f23}</Project>
+      <Name>Zenith.Core.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Shared\Zenith.Global\Zenith.Assets\Zenith.Assets.csproj">
+      <Project>{64238876-8c39-4631-8227-f321128b0c5d}</Project>
+      <Name>Zenith.Assets</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Shared\Zenith.Global\Zenith.Client.Shared\Zenith.Client.Shared.csproj">
+      <Project>{35084642-d9a0-4b9e-9216-8e42f52f49f1}</Project>
+      <Name>Zenith.Client.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zenith.Client.ApplicationServices\Zenith.Client.ApplicationServices.csproj">
+      <Project>{c0983a76-8831-4017-9694-5ce67f713d68}</Project>
+      <Name>Zenith.Client.ApplicationServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zenith.VisualizationModule\Zenith.VisualizationModule.csproj">
+      <Project>{23b6015b-3e1d-4c2c-9471-c2f05bfa84d2}</Project>
+      <Name>Zenith.VisualizationModule</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Styles\StyleOverrides.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <None Include="TO_DELETE\SearchStartPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </None>
+    <Page Include="Views\CatalogSearchResultsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ConeObjectSearchView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\IdentifierObjectSearchView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ObjectsListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ObjectDetailsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ObjectSearchOptions.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ObservationData.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SearchHistory.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SearchOptionsPane.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SearchStartPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SearchTileView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controls\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
